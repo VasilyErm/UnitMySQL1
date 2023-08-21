@@ -27,4 +27,25 @@ public class BankLoginTest {
         var verificationCode = SQLHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode.getCode());
     }
+
+    @Test
+    @DisplayName("Get error notification when user not exist")
+    void getErrorNotificationUserNotExist() {
+        var loginPage = open("http://localhost:9999/", LoginPage.class);
+        var authInfo = DataHelper.generateRandomUser();
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotificationVisibility();
+    }
+
+    @Test
+    @DisplayName("Get error notification when login not exist")
+    void getErrorNotificationLoginNotExist() {
+        var loginPage = open("http://localhost:9999/", LoginPage.class);
+        var authInfo = DataHelper.getAuthInfoWithTestData();
+        var verificationPage = loginPage.validLogin(authInfo);
+        verificationPage.verifyVerificationPageVisibility();
+        var verificationCode = DataHelper.generateRandomVerificationCode();
+        verificationPage.verify(verificationCode.getCode());
+        verificationPage.verifyErrorNotificationVisibility();
+    }
 }
