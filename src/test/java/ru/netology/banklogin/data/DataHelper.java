@@ -16,11 +16,11 @@ public class DataHelper {
         return new AuthInfo("vasya", "qwerty123");
     }
 
-    public static String generateRandomLogin() {
+    private static String generateRandomLogin() {
         return faker.name().username();
     }
 
-    public static String generateRandomPassword() {
+    private static String generateRandomPassword() {
         return faker.internet().password();
     }
 

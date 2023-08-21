@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.banklogin.data.SQLHelper.cleanDataBase;
 
 public class BankLoginTest {
+
     @AfterAll
     static void teardown() {
         cleanDataBase();
@@ -25,7 +26,5 @@ public class BankLoginTest {
         verificationPage.verifyVerificationPageVisibility();
         var verificationCode = SQLHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode.getCode());
-        }
-
-
     }
+}
